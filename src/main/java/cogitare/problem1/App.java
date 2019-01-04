@@ -23,14 +23,14 @@ import java.util.stream.Collectors;
  */
 public class App {
 	
-	public static Map<String, Map<Integer, List<Integer>>> allTrains;
+	public static Map<String, TrainData> allTrains;
 	
 	public static void main(String[] args) {
 		//file location
 		String fileName = "D:\\Job Interviews\\Cogitare\\TrainDetails.txt";
 		
 		//Create a map for all registered trains
-		allTrains = new HashMap<String, Map<Integer,List<Integer>>>();
+		allTrains = new HashMap<String, TrainData>();
 //		Map<Integer, List<Integer>> trainSpeedData = new HashMap<>();
 
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -50,60 +50,24 @@ public class App {
 					int energyConsumption = Integer.parseInt(trains[2]);
 					
 					//get the map of all speeds and energy of a specific train
-					Map<Integer, List<Integer>> trainSpeedData = allTrains.get(trainName);
+					TrainData trainData = allTrains.get(trainName);
 					
 					//if trainSpeedData is null, there was nothing inserted yet
-					if(trainSpeedData == null) {
+					if(trainData == null) {
 						
 						//create map of energyConsumption for each speed
-						trainSpeedData = new HashMap<Integer, List<Integer>>();
+						trainData = new TrainData();
 						
-				//create a new list for all energyConsumption for a particular speed
-						List<Integer> energyList = new ArrayList<>();
-						//add current energyConsumption to the list
-						energyList.add(energyConsumption);
-						
-						//insert new list into the map
-						trainSpeedData.put(speed, energyList);
-						//add trainspeedData to the current trainName
-						allTrains.put(trainName, trainSpeedData);
-					}
-					else {
-						// get energy speed by list
-						List<Integer> energyList = trainSpeedData.get(speed);
-						
-						// if list is null then there was no record for this train at this speed.
-						if(energyList == null) {
-							
-							//create new list
-							energyList = new ArrayList<>();
-							//add energy to the list 
-							energyList.add(energyConsumption);
-							//add list to the speed in map
-							trainSpeedData.put(speed, energyList);
-							
-						}
-						else {
-							//there is a energy list olready, just add to the list another record
-							energyList.add(energyConsumption);
-							//add to the map
-							trainSpeedData.put(speed, energyList);
-							
-						}
 						
 					}
-					
-					
-					
-					
-					// perhaps we won't need TrainData class 
-					TrainData train = new TrainData(trainName, speed, energyConsumption);
 
+					trainData.setSpeedAndEnergy(speed, energyConsumption);
 					
 					
+					//add trainspeedData to the current trainName
+					allTrains.put(trainName, trainData);
 					
 					
-//					System.out.println(train.getName());
 					
 				}
 			}
@@ -121,22 +85,23 @@ public class App {
 		
 		Scanner input = new Scanner(System.in);
 		System.out.println("Enter the train name: ");
-//		String searchedTrain = input.next();
-//		getLowestSpeed("201V");
-		getHighestEnergyConsumption("157P");
+		String searchedTrain = input.next();
+		getLowestSpeed(searchedTrain);
+		getHighestEnergyConsumption(searchedTrain);
 		
 		
 	}
 	
 	
 	public static void getLowestSpeed(String searchedTrain){
-		Map<Integer, List<Integer>> trainData = allTrains.get(searchedTrain);
-		boolean isTrain = searchTrain(searchedTrain);
+		TrainData trainData = allTrains.get(searchedTrain);
+		boolean isTrainFound = trainData != null;
 		
-		if(isTrain) {
+		if(isTrainFound) {
 //			List<Integer> allSpeeds = new ArrayList<>(trainData.keySet());
-			int min = Collections.min(trainData.keySet());
-			System.out.println("Lowest Speed: " + min);
+//			int min = Collections.min(trainData.getData().keySet());
+			System.out.println("Lowest Speed: " + trainData.getLowestSpeed());
+			
 		}
 		else {
 			System.out.println("No details found");
@@ -149,16 +114,18 @@ public class App {
 	
 	
 	public static String getHighestEnergyConsumption(String searchedTrain) {
-		Map<Integer, List<Integer>> trainData = allTrains.get(searchedTrain);
-		boolean isTrain = searchTrain(searchedTrain);
+		TrainData trainData = allTrains.get(searchedTrain);
+		
+		boolean isTrainFound = trainData != null;
+		
 		String d = "ss";
 		
 		int maximum = -1;
 		int speed = -1;
 		
-		for(Integer key: trainData.keySet()) {
+		for(Integer key: trainData.getData().keySet()) {
 			
-			List<Integer> energies = trainData.get(key);
+			List<Integer> energies = trainData.getData().get(key);
 			
 			for(Integer n : energies) {
 				if( n > maximum) {
@@ -171,14 +138,6 @@ public class App {
 		return d;
 	}
 	
-	
-	
-	
-	public static boolean searchTrain(String trainName) {
-		boolean train = allTrains.containsKey(trainName);
-		
-		return train;
-	}
 	
 	
 	
