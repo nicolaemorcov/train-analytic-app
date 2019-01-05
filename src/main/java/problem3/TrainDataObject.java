@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class TrainDataObject {
 
-	private Map<String, List<String>> data;
+//	private Map<String, List<String>> data;
 	
 	private String trainId;
 	private String station;
@@ -29,26 +29,11 @@ public class TrainDataObject {
 	
 	@Override
 	public String toString() {
-		return "TrainDataObject [data=" + data + ", trainId=" + trainId + ", station=" + station
+		return "TrainDataObject [trainId=" + trainId + ", station=" + station
 				+ ", actualDepartureTime=" + actualDepartureTime + ", driverName=" + driverName + ", departureLateness="
 				+ departureLateness + "]";
 	}
 
-
-
-
-
-	public Map<String, List<String>> getData() {
-		return data;
-	}
-
-
-
-
-
-	public void setData(Map<String, List<String>> data) {
-		this.data = data;
-	}
 
 
 

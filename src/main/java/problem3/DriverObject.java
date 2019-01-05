@@ -6,44 +6,31 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="train_driver_details")
-public class JourneyObject {
+public class DriverObject {
 
 	@Column(name="train_id")
 	private String trainId;
-	private String origin;
-	private String destination;
+	private String fromStation;
+	private String toStation;
 	private String driverName;
 	private String journeyStatus;
-	
-	
-	
-	
-	
-	public JourneyObject(String trainId, String origin, String destination, String driverName, String journeyStatus) {
-		super();
-		this.trainId = trainId;
-		this.origin = origin;
-		this.destination = destination;
-		this.driverName = driverName;
-		this.journeyStatus = journeyStatus;
-	}
 	public String getTrainId() {
 		return trainId;
 	}
 	public void setTrainId(String trainId) {
 		this.trainId = trainId;
 	}
-	public String getOrigin() {
-		return origin;
+	public String getFromStation() {
+		return fromStation;
 	}
-	public void setOrigin(String origin) {
-		this.origin = origin;
+	public void setFromStation(String fromStation) {
+		this.fromStation = fromStation;
 	}
-	public String getDestination() {
-		return destination;
+	public String getToStation() {
+		return toStation;
 	}
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setToStation(String toStation) {
+		this.toStation = toStation;
 	}
 	public String getDriverName() {
 		return driverName;
@@ -57,6 +44,7 @@ public class JourneyObject {
 	public void setJourneyStatus(String journeyStatus) {
 		this.journeyStatus = journeyStatus;
 	}
+	
 	
 	
 	
