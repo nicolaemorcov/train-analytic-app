@@ -1,0 +1,21 @@
+CREATE TABLE if not exists train_driver_details (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `train_id` VARCHAR(45) NOT NULL,
+  `from_station` VARCHAR(45) NOT NULL,
+  `to_station` VARCHAR(45) NOT NULL,
+  `driver_name` VARCHAR(45) NOT NULL,
+  `journey_status` ENUM('COMPLETED', 'INPROGRESS') NOT NULL DEFAULT 'COMPLETED',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+
+  
+  
+  CREATE TABLE if not exists 22222222222dxxczz (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `train_id` VARCHAR(45) NOT NULL,
+  `station` VARCHAR(45) NOT NULL,
+  `departure_time_at_station` VARCHAR(45) NOT NULL,
+  `departure_lateness_in_seconds` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+  

@@ -29,9 +29,8 @@
 				
 				<!-- Map the classes -->
 				<!-- Each pojo class represents a table in db -->
-				
-<!-- 				<mapping class="com.kolia.entities.User"/>
-				<mapping class="com.kolia.entities.Course"/> -->
+				<mapping class="problem3.DriverObject"/>
+				<mapping class="problem3.DelayObject"/>
 				
           	</session-factory>
           
