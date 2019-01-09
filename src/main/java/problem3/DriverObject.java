@@ -63,6 +63,11 @@ public class DriverObject {
 	public void setId(int id) {
 		this.id = id;
 	}
+	@Override
+	public String toString() {
+		return "DriverObject ===> id=" + id + ", trainId=" + trainId + ", fromStation=" + fromStation + ", toStation="
+				+ toStation + ", driverName=" + driverName + ", journeyStatus=" + journeyStatus;
+	}
 	
 	
 	

@@ -37,7 +37,6 @@ public class Problem2 {
 		String destionation = "";
 		String origin = "";
 
-		Map<String, Map<String, Integer>> maximumDemand1 = new HashMap<>();
 		Map<String, Integer> stationDemand = new HashMap<String, Integer>();
 
 		System.out.println("Insert the stations: ");
@@ -75,7 +74,6 @@ public class Problem2 {
 
 			
 			stationDemand.put(destionation, maximumDemand);
-			maximumDemand1.put(originStation, stationDemand);
 			
 			matrix.add(passengerDemands);
 			

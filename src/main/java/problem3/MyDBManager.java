@@ -74,5 +74,8 @@ Configuration cfg;
 	public void delete(Object arg) {
 		session.delete(arg);;
 	}
+	public void merge(Object arg) {
+		session.merge(arg);
+	}
 
 }

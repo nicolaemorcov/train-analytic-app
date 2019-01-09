@@ -48,11 +48,16 @@ public class Problem3 {
 			}
 
 			trainDataMap.forEach((trainId, trainDataList) -> {
+				
 
 				TrainDataObject fromStationObject = null;
 				TrainDataObject toStationObject = null;
 				
+				String trainStatus = "INPROGRESS";
 				
+				// fromStation will always be null at this point in this forEach.
+				// but in the future I can check fromStation object against the database if 
+				// there is any records on this particular journey
 				if (fromStationObject == null) {
 					fromStationObject = trainDataList.get(0);
 					
@@ -64,11 +69,16 @@ public class Problem3 {
 					driverObject.setDriverName(fromStationObject.getDriverName());
 					driverObject.setTrainId(trainId);
 					driverObject.setFromStation(fromStationObject.getStation());
+					driverObject.setJourneyStatus(trainStatus);
+					service.registerObject(driverObject);
+					System.out.println(driverObject.toString());
 				}
 				
 
 				
 				for (int i = 0; i < trainDataList.size(); i++) {
+					
+					//skips the first index, as it is already set in method above
 					if (i == 0 && trainDataList.size() > 1) {
 						continue;
 					}
@@ -77,7 +87,7 @@ public class Problem3 {
 						
 
 
-					String trainStatus = "INPROGRESS";
+					
 					if (toStationObject.getDepartureLateness().equalsIgnoreCase("NA")) {
 						trainStatus = "COMPLETED";
 					}
@@ -85,10 +95,12 @@ public class Problem3 {
 					// if currentDriverName notEqual to fromStation.DriverName
 					// db.persist(driverObject)
 					// create new driverObject and set fromStation from fromStationObject
-					String name1 = toStationObject.getDriverName();
-					String name2 = fromStationObject.getDriverName();
-					if(!name1.equalsIgnoreCase(name2)) {
-						service.registerObject(driverObject);
+					String driverFromStation = fromStationObject.getDriverName();
+					String driverAtNextStation = toStationObject.getDriverName();
+					if(!driverFromStation.equalsIgnoreCase(driverAtNextStation)) {
+						//persist current driver
+						service.update(driverObject);
+						// create new driver who will start at the next station
 						driverObject = new DriverObject();
 						driverObject.setFromStation(toStationObject.getStation());
 						driverObject.setDriverName(toStationObject.getDriverName());
@@ -127,7 +139,7 @@ public class Problem3 {
 					}
 
 				}
-				service.registerObject(driverObject);
+				service.update(driverObject);
 
 			});
 

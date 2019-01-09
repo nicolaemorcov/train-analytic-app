@@ -24,5 +24,16 @@ public class DataService {
 		db.persist(Object);
 		db.closeTransaction();
 	}
+	public void mergeObject(Object arg) {
+		db.startTransaction();
+		db.merge(arg);
+		db.closeTransaction();
+	}
+	
+	public void update(DriverObject driverObject) {
+		db.startTransaction();
+		db.saveOrUpdate(driverObject);
+		db.closeTransaction();
+	}
 	
 }

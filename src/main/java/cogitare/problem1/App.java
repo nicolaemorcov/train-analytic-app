@@ -42,6 +42,8 @@ public class App {
 			
 			
 			while ((line = br.readLine()) != null) {
+				
+				//checks if the line is not empty
 				if (line.length() > 0) {
 					String[] trains = line.split("-");
 					

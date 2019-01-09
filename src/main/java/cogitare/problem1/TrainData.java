@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class TrainData {
 
+	//This will be the map of all speeds(each speed as key) of a particular train
+	// mapped to the value wich will be a list of energyConsumption
 	private Map<Integer,List<Integer>> data;
 	
 	int lowestSpeed;
@@ -18,6 +20,7 @@ public class TrainData {
 	public TrainData() {
 		this.data = new HashMap<Integer, List<Integer>>();
 		this.lowestSpeed = -1;
+		this.highestEnergyConsumption = -1;
 	}
 
 	
